@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideal Body Tracker</title>
+
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input ,select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+
+
+
+    </style>
+
+
+
+</head>
+<body>
+
+    <div class="container">
+        <h2>Ideal Body Tracker</h2>
+
+	<label for="Name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter Your Name" required>
+
+
+	<label for="Age">Age</label>
+        <input type="number" id="age" placeholder="Enter Your Age" required>
+
+<label for="gender">Gender</label>
+<select id="gender" name="gender" aria-label="Select your gender identity">
+    <option value="">Please select</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    <option value="transgender">Transgender</option>
+    <option value="prefer-not-to-say">Prefer not to say</option>
+    <option value="other">Other</option>
+    <option value="self-describe">I prefer to self-describe</option>
+</select>
+
+
+
+
+
+	<label for="diet">Diet type</label>
+<select id="diet" name="diet" aria-label="Select your diet type">
+    <option value="">Please select</option>
+    <option value="Vegetarian">Vegetarian</option>
+    <option value="Non-Vegetarian">Non-Vegetarian</option>
+    <option value="Vegan">Vegan</option>
+    <option value="Keto">Keto</option>
+    <option value="Paleo">Paleo</option>
+    <option value="Mixed">Mixed</option>
+    
+</select>
+
+	<label for="intake">Water Intake</label>
+        <input type="number" id="waterIntake" placeholder="Enter number of liter water intake" required>
+
+	<label for="Sleep">Sleep Duration</label>
+        <input type="number" id="Sleep" placeholder="Enter number of hours Sleep" required>
+
+
+
+        <label for="weight">Weight (kg)</label>
+        <input type="number" id="weight" placeholder="Enter weight" required>
+        <label for="height">Height (m)</label>
+        <input type="number" id="height" step="0.01" placeholder="Enter height" required>
+
+
+
+
+        <button onclick="calculateBMI()">Calculate BMI</button>
+
+        <div class="result" id="bmiResult"></div>
+    </div>
+
+
+
+
+    <script>
+function calculateBMI() {
+    let weight = parseFloat(document.getElementById("weight").value);
+    let heightCm = parseFloat(document.getElementById("height").value);
+
+    if (isNaN(weight) || isNaN(heightCm) || heightCm <= 0) {
+        document.getElementById("bmiResult").innerHTML = "Please enter valid values!";
+        return;
+    }
+
+    let height = heightCm / 100;  // Convert cm to meters
+    let bmi = (weight / (height * height)).toFixed(2);
+    let category = "";
+
+    if (bmi < 18.5) {
+        category = "Underweight";
+    } else if (bmi >= 18.5 && bmi < 24.9) {
+        category = "Normal weight";
+    } else if (bmi >= 25 && bmi < 29.9) {
+        category = "Overweight";
+    } else {
+        category = "Obese";
+    }
+
+    document.getElementById("bmiResult").innerHTML = `Your BMI: ${bmi} (${category})`;
+}
+
+
+    </script>
+
+
+
+
+</body>
+</html>
